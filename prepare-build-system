@@ -105,50 +105,6 @@ then
     echo yes | $SDK_MANAGER "build-tools;$ANDROID_BUILD_TOOLS"
 fi
 
-if [ "$DOWNLOAD_PJSIP" == "1" ]
-then
-    echo ""
-    echo "Downloading PJSIP ${PJSIP_VERSION} ..."
-    echo ""
-    cd $DOWNLOAD_DIR
-    pjsipFile="pjsip.tar.gz"
-    curl -L -# -o $pjsipFile "$PJSIP_DOWNLOAD_URL" 2>&1
-    rm -rf "$PJSIP_DIR_NAME"
-    echo "PJSIP downloaded!"
-    echo "Extracting PJSIP ..."
-    tar xzf $pjsipFile && rm -rf $pjsipFile
-
-    PATCH_DIR=$BASEDIR/patches
-
-    # Fixed Call-ID PATCH
-    if [ "${USE_FIXED_CALLID}" == "1" ]
-        then
-        echo ""
-        echo ""
-        echo "######################################################################"
-        echo "Apply patch to use a fixed Call-ID in registration ..."
-        echo "######################################################################"
-        echo ""
-        cd $PATCH_DIR/fixed_callid
-        ./patch.sh
-        cd $BASEDIR
-    fi
-
-    # Rtcp-FB-Event data to pjsua2 PATCH
-    if [ "${EXPORT_RTCP_FB_DATA}" == "1" ]
-        then
-        echo ""
-        echo ""
-        echo "######################################################################"
-        echo "Apply patch to export RTCP-FB Event data to pjsua2 ..."
-        echo "######################################################################"
-        echo ""
-        cd $PATCH_DIR/export_rtcp_fb
-        ./patch.sh
-        cd $BASEDIR
-    fi
-fi
-
 if [ "$DOWNLOAD_SWIG" == "1" ]
 then
     echo ""
