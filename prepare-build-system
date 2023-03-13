@@ -21,7 +21,6 @@ fi
 if [ ! -d "$BUILD_DIR" ]
 then
   mkdir $BUILD_DIR
-  mkdir $PJSIP_BUILD_OUT_PATH
 fi
 
 if [ "$SETUP_PACKAGES" == "1" ]
