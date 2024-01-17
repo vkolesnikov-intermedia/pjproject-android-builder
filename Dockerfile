@@ -1,4 +1,4 @@
-FROM --platform=linux/amd64 ubuntu:20.04
+FROM ubuntu:20.04
 
 # Set the path to the repo root folder
 # I set /home because I'm working within a Docker container
