@@ -23,11 +23,12 @@ function setupPathsAndExports {
     LIB_PATH="${OPENSSL_BUILD_OUT_PATH}/libs"
     LOG_PATH="${OPENSSL_BUILD_OUT_PATH}/logs"
 
-    # Export ANDROID_NDK_ROOT env var
-    export ANDROID_NDK_ROOT=$NDK_PATH
+    # Export ANDROID_NDK_HOME env var
+    export ANDROID_NDK_HOME=$NDK_PATH
     # Add toolchains bin directory to PATH
-    # for more info check https://github.com/openssl/openssl/blob/master/NOTES-ANDROID.md
-    PATH=$ANDROID_NDK_ROOT/toolchains/llvm/prebuilt/linux-x86_64/bin:$ANDROID_NDK_ROOT/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/bin:$PATH
+    TOOLCHAIN_PATH="$NDK_PATH/toolchains/llvm/prebuilt/linux-x86_64"
+    # for some reason it does not need to be exported
+    PATH=$TOOLCHAIN_PATH/bin:$PATH
 }
 
 function clearBuildDirectory {
@@ -74,7 +75,9 @@ initialSetup
 setupPathsAndExports
 # Clear and recreate the build output directory
 clearBuildDirectory
-СС=clang
+# Set clang compiler, instead of gcc by default
+CC=clang
+
 
 ##############################################################################
 ############################        MAIN          ############################
@@ -98,7 +101,7 @@ do
     getArchitecture $arch
 
     # Create Makefile
-    ./Configure $ARCHITECTURE enable-pic -D__ANDROID_API__=${OPENSSL_TARGET_NDK_LEVEL} >> "${LOG_PATH}/${arch}.log" 2>&1
+    ./Configure $ARCHITECTURE -D__ANDROID_API__=${OPENSSL_TARGET_NDK_LEVEL} >> "${LOG_PATH}/${arch}.log" 2>&1
 
     # Build Openssl
     echo "Building OpenSSL Library for Android arch $arch"
