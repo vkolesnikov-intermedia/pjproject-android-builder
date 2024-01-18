@@ -74,7 +74,7 @@ initialSetup
 setupPathsAndExports
 # Clear and recreate the build output directory
 clearBuildDirectory
-
+СС=clang
 
 ##############################################################################
 ############################        MAIN          ############################
