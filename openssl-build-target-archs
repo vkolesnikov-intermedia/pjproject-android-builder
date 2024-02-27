@@ -98,7 +98,7 @@ do
     getArchitecture $arch
 
     # Create Makefile
-    ./Configure $ARCHITECTURE -D__ANDROID_API__=${OPENSSL_TARGET_NDK_LEVEL} -static >> "${LOG_PATH}/${arch}.log" 2>&1
+    ./Configure $ARCHITECTURE -D__ANDROID_API__=${OPENSSL_TARGET_NDK_LEVEL} >> "${LOG_PATH}/${arch}.log" 2>&1
 
     # Build Openssl
     echo "Building OpenSSL Library for Android arch $arch"
