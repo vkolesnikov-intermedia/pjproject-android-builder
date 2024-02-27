@@ -31,7 +31,7 @@ then
     apt-get install -y openjdk-17-jdk
 
     DEPS="unzip git curl bzip2 binutils make autoconf \
-          libopus0 libpcre3 libpcre3-dev build-essential nasm python"
+          libopus0 libpcre3 libpcre3-dev build-essential nasm"
     sh -c "dpkg --add-architecture i386; apt-get update && apt-get -y upgrade && apt-get install -y ${DEPS}"
 fi
 
