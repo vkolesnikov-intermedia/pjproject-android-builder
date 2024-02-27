@@ -13,7 +13,6 @@ set -e
 ##############################################################################
 
 function initialSetup {
-    CUR_DIR="$(pwd)"
     OPENSSL_SRC_PATH="$DOWNLOAD_DIR/${OPENSSL_DIR_NAME}"
     OPENSSL_TMP_FOLDER="/tmp/openssl"
 }
