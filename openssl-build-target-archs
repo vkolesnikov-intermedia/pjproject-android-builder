@@ -75,9 +75,6 @@ initialSetup
 setupPathsAndExports
 # Clear and recreate the build output directory
 clearBuildDirectory
-# Set clang compiler, instead of gcc by default
-CC=clang
-
 
 ##############################################################################
 ############################        MAIN          ############################
