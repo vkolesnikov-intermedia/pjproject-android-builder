@@ -25,6 +25,7 @@ function setupPathsAndExports {
 
     # Export ANDROID_NDK_ROOT env var
     export ANDROID_NDK_ROOT=$NDK_PATH
+    export CFLAGS="-fPIC"
     # Add toolchains bin directory to PATH
     # for more info check https://github.com/openssl/openssl/blob/master/NOTES-ANDROID.md
     PATH=$ANDROID_NDK_ROOT/toolchains/llvm/prebuilt/linux-x86_64/bin:$ANDROID_NDK_ROOT/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/bin:$PATH
@@ -100,7 +101,7 @@ do
     getArchitecture $arch
 
     # Create Makefile
-    ./Configure $ARCHITECTURE -D__ANDROID_API__=${OPENSSL_TARGET_NDK_LEVEL} >> "${LOG_PATH}/${arch}.log" 2>&1
+    ./Configure $ARCHITECTURE -D__ANDROID_API__=${OPENSSL_TARGET_NDK_LEVEL} -static >> "${LOG_PATH}/${arch}.log" 2>&1
 
     # Build Openssl
     echo "Building OpenSSL Library for Android arch $arch"
