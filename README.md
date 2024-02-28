@@ -1,28 +1,24 @@
 # PJSIP Android Builder
 
-Easily build PJSIP with: OpenSSL, OpenH264, Opus and G.729 (without Intel IPP) for Android.
+Easily build PJSIP with: OpenSSL, Opus and G.729 (without Intel IPP) for Android.
 
 ## Purpose
 
-I needed an easily replicable build system to build PJSIP <http://www.pjsip.org/> native library with NDK for Android. So, I created an Ubuntu docker container (20.04.4 LTS) and wrote some scripts to download, install all the requirements needed to make it a complete build environment and some automated build scripts.
+I needed an easily replicable build system to build PJSIP <http://www.pjsip.org/> native library with NDK for Android. 
+So, I created an Ubuntu docker container (22.04 LTS) and wrote some scripts to download, install all the requirements needed to make it a complete build environment and some automated build scripts.
 If you want to contribute, your help is really appreciated :)
 
-## Support - PJSIP 2.9+
+## Support - PJSIP 2.13+
 
-Using Android API `21`.
+Using Android API `28`.
 Default versions included:
 
 - Android Cmd Tools: `8512546`
-- Android NKD: `r21e`
-- OpenSSL: `1.1.1k` (Uses NDK Level 21)
-- OpenH264: `2.1.0` (Uses NDK Level 21)
+- Android NKD: `r26c`
+- OpenSSL: `3.1.2` (Uses NDK Level 28)
 - Opus: `1.3.1`
 - bcg729: `1.1.1`
 - Swig: `4.0.2`
-
-## Legacy support
-
-Checkout tag `2.2.0` to build older pjsip (or other libs) versions.
 
 ## Setup
 
@@ -41,7 +37,7 @@ docker run -it --name pjsip-builder -v /path/to/host/repo:/home ubuntu bash
 ### Prepare Environment
 
 1. Execute `./prepare-build-system`
-2. If everything goes well you should see all the compiled libraries (opus, openh264, openssl, bcg729) in the **output** folder.
+2. If everything goes well you should see all the compiled libraries (opus, openssl, bcg729) in the **output** folder.
 
 ## Build PJSIP
 
@@ -68,7 +64,6 @@ This project has separate independent script to build only single libraries:
 
 - Bcg729
 - OpenSSL
-- OpenH264
 - Opus
 
 If you want to build a single library, or just change it's version, you can disable everything except the library you want to build from the `config.conf` file and specify the version you want (of course you would also need the NDK). Then execute the `prepare-build-system` script. If the environment is ready you can also just run the lib dedicated script.
