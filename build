@@ -12,6 +12,7 @@ PJSUA_GENERATED_SO_PATH="${PJSUA_BASE_DIR}/java/android/$PJSIP_GENERATED_ROOT_DI
 FINAL_BUILD_DIR=$PJSIP_BUILD_OUT_PATH
 FINAL_BUILD_LIB="${FINAL_BUILD_DIR}/lib"
 FINAL_BUILD_LOGS="${FINAL_BUILD_DIR}/logs"
+FINAL_BUILD_INCLUDES="${FINAL_BUILD_DIR}/includes"
 
 export ANDROID_NDK_ROOT="${DOWNLOAD_DIR}/${NDK_DIR_NAME}"
 export PATH="$ANDROID_NDK_ROOT:$PATH"
@@ -24,6 +25,7 @@ function clearBuildDirectory {
     echo "Make build folders ..."
     mkdir -p "${FINAL_BUILD_LIB}"
     mkdir -p "${FINAL_BUILD_LOGS}"
+    mkdir -p "${FINAL_BUILD_INCLUDES}"
 }
 
 function setConfigSite {
@@ -79,6 +81,24 @@ function buildPjSip {
     # using /*/* we assume there is only one directory (whatever its name is)
     # and retrieve all its content (.so libs)
     mv "${PJSUA_GENERATED_SO_PATH}"/*/* "${FINAL_BUILD_LIB}/${arch}"
+
+    # Copy headers
+    mkdir -p "${FINAL_BUILD_INCLUDES}/${arch}"
+
+    mkdir -p "${FINAL_BUILD_INCLUDES}/${arch}/pjlib"
+    cp -r "${PJSIP_TMP_PATH}/pjlib/include"/* "${FINAL_BUILD_INCLUDES}/${arch}/pjlib"
+
+    mkdir -p "${FINAL_BUILD_INCLUDES}/${arch}/pjlib-util"
+    cp -r "${PJSIP_TMP_PATH}/pjlib-util/include"/* "${FINAL_BUILD_INCLUDES}/${arch}/pjlib-util"
+
+    mkdir -p "${FINAL_BUILD_INCLUDES}/${arch}/pjmedia"
+    cp -r "${PJSIP_TMP_PATH}/pjmedia/include"/* "${FINAL_BUILD_INCLUDES}/${arch}/pjmedia"
+
+    mkdir -p "${FINAL_BUILD_INCLUDES}/${arch}/pjnath"
+    cp -r "${PJSIP_TMP_PATH}/pjnath/include"/* "${FINAL_BUILD_INCLUDES}/${arch}/pjnath"
+
+    mkdir -p "${FINAL_BUILD_INCLUDES}/${arch}/pjsip"
+    cp -r "${PJSIP_TMP_PATH}/pjsip/include"/* "${FINAL_BUILD_INCLUDES}/${arch}/pjsip"
 }
 
 function copyPjSuaJava {
