@@ -97,6 +97,9 @@ function buildPjSip {
     mkdir -p "${FINAL_BUILD_INCLUDES}/${arch}/pjnath"
     cp -r "${PJSIP_TMP_PATH}/pjnath/include"/* "${FINAL_BUILD_INCLUDES}/${arch}/pjnath"
 
+    mkdir -p "${FINAL_BUILD_INCLUDES}/${arch}/pjnat64"
+    cp -r "${PJSIP_TMP_PATH}/pjnat64/include"/* "${FINAL_BUILD_INCLUDES}/${arch}/pjnat64"
+
     mkdir -p "${FINAL_BUILD_INCLUDES}/${arch}/pjsip"
     cp -r "${PJSIP_TMP_PATH}/pjsip/include"/* "${FINAL_BUILD_INCLUDES}/${arch}/pjsip"
 }
